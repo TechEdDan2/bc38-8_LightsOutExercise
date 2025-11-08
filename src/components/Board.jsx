@@ -6,9 +6,10 @@ import Cell from "./Cell";
  * Game board for lights out
  * Properties:
  *
- * - nrows: number of rows of board
- * - ncols: number of cols of board
+ * - nrows: number of rows of board default 5 based on typical game size
+ * - ncols: number of cols of board default 5 based on typical game size
  * - chanceLightStartsOn: float, chance any cell is lit at start of game
+ *    default 0.25 (25% chance) because that seems like a reasonable starting point
  *
  * State:
  *
@@ -27,18 +28,25 @@ import Cell from "./Cell";
  *
  **/
 
-const Board = ({ nrows = 5, ncols = 5, chanceLightStartsOn }) => {
+const Board = ({ nrows = 5, ncols = 5, chanceLightStartsOn = 0.25 }) => {
     const [board, setBoard] = useState(createBoard());
 
     /** create a board nrows high/ncols wide, each cell randomly lit or unlit */
     function createBoard() {
         let initialBoard = [];
-        // TODO: create array-of-arrays of true/false values
+        // FINISHED: Create 2D array-of-arrays of true/false values
+        initialBoard = Array.from({ length: nrows }, () =>
+            Array.from({ length: ncols }, () =>
+                Math.random() < chanceLightStartsOn
+            )
+        );
         return initialBoard;
     }
 
     function hasWon() {
-        // TODO: check the board in state to determine whether the player has won.
+        // FINISHED: check the board in state to determine whether the player has won. Use Array.every() method twice to check if every cell in every row is false.
+        const check = board.every(row => row.every(cell => !cell));
+        return check;
     }
 
     function flipCellsAround(coord) {
@@ -53,21 +61,51 @@ const Board = ({ nrows = 5, ncols = 5, chanceLightStartsOn }) => {
                 }
             };
 
-            // TODO: Make a (deep) copy of the oldBoard
+            // FINISHED: Make a (deep) copy of the oldBoard by mapping over each row and copying it with the spread operator
+            const boardCopy = oldBoard.map(row => [...row]);
 
-            // TODO: in the copy, flip this cell and the cells around it
+            // FINISHED: in the copy, flip this cell and the cells around it and return the copy
+            flipCell(y, x, boardCopy); // flip initial cell
+            flipCell(y - 1, x, boardCopy); // flip above
+            flipCell(y + 1, x, boardCopy); // flip below
+            flipCell(y, x - 1, boardCopy); // flip left
+            flipCell(y, x + 1, boardCopy); // flip right
 
-            // TODO: return the copy
+            return boardCopy;
         });
     }
 
-    // if the game is won, just show a winning msg & render nothing else
+    // FINSHED: if the game is won, just show a winning msg & render nothing else ... moved to the return statement below
 
-    // TODO
+    // FINISHED: make table board of Cell components with a nested row-major loop
+    let lightsOutBoard = [];
+    for (let y = 0; y < nrows; y++) {
+        let row = [];
+        for (let x = 0; x < ncols; x++) {
+            let coord = `${y}-${x}`;
+            row.push(
+                <Cell
+                    key={coord}
+                    isLit={board[y][x]}
+                    flipCellsAroundMe={() => flipCellsAround(coord)}
+                />
+            );
+        }
+        lightsOutBoard.push(<tr key={y}>{row}</tr>);
+    }
 
-    // make table board
-
-    // TODO
+    // REFACTORED to use a ternary operator in the return statement
+    return (
+        <div>
+            {hasWon() ? (
+                <div className="Board-win">You Win!</div>
+            ) : (
+                <table className="Board">
+                    <tbody>{lightsOutBoard}</tbody>
+                </table>
+            )}
+        </div>
+    );
 }
 
 export default Board;

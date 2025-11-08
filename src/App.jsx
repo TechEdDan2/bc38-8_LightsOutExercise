@@ -19,7 +19,7 @@ function App() {
       </div>
       <h1>Vite + React Lights Out Game</h1>
       <div className="App">
-        {/* <Board /> */}
+        <Board nrows={3} ncols={3} chanceLightStartsOn={0.25} />
       </div>
 
     </>
