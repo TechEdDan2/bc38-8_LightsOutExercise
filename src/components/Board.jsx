@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Board.css"
+import Cell from "./Cell";
 
 /**
  * Game board for lights out
@@ -26,7 +27,7 @@ import "./Board.css"
  *
  **/
 
-const Board = ({ nrows, ncols, chanceLightStartsOn }) => {
+const Board = ({ nrows = 5, ncols = 5, chanceLightStartsOn }) => {
     const [board, setBoard] = useState(createBoard());
 
     /** create a board nrows high/ncols wide, each cell randomly lit or unlit */
