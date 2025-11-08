@@ -4,6 +4,7 @@ This template provides a minimal setup to get React working in Vite with HMR and
 
 ## Table of Contents
 - [Project Overview](#project-overview)
+- [Images](#images)
 - [Installation](#installation)
 - [Usage](#usage)
 - [Built With](#built-with)
@@ -15,6 +16,11 @@ This template provides a minimal setup to get React working in Vite with HMR and
 This project is creating a React application using Vite to create a "Lights Out" game. The game consists of a grid of lights that can be turned on or off by clicking on them. The objective is to turn off all the lights on the board. The rules are as follows:
 - Clicking on a light will toggle its state (on/off) as well as the state of its adjacent lights (up, down, left, right).
 - The game is won when all lights are turned off.
+
+## Images
+![Game Board Start](./src/assets/Screenshot_game_start.png)
+![Game Board Win](./src/assets/Screenshot_play_agin.png)
+
 
 ## Installation
 1. Clone the repository:
