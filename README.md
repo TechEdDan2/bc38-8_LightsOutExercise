@@ -8,6 +8,7 @@ This template provides a minimal setup to get React working in Vite with HMR and
 - [Installation](#installation)
 - [Usage](#usage)
 - [Built With](#built-with)
+- [Future Improvements](#future-improvements)
 - [Author](#author)
 - [Acknowledgments](#acknowledgments)
 - [License](#license)
@@ -51,6 +52,14 @@ This will start the application at `http://localhost:?`.
 - [npm](https://www.npmjs.com/) - Package manager for JavaScript
 - [Vitest](https://vitest.dev/) - A blazing fast unit testing framework powered by Vite
 - [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/) - Simple and complete React DOM testing utilities that encourage good testing practices
+
+## Future Improvements
+- Add more features to the game, such as different board sizes or difficulty levels.
+- Improve the user interface with better styling and animations.
+- Implement a scoring system based on the number of moves taken to win the game.
+- Add sound effects and background music to enhance the gaming experience.
+- Implement snapshot tests for components using Vitest and React Testing Library to check if the UI renders correctly.
+- Implement more unit tests for game logic functions to ensure they work as expected, including handling cell clicking.
 
 ## Author
 - Github - [TechEdDan2](https://github.com/TechEdDan2)
