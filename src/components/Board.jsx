@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./Board.css"
 import Cell from "./Cell";
+import PlayAgain from "./PlayAgain";
 
 /**
  * Game board for lights out
@@ -48,6 +49,12 @@ const Board = ({ nrows = 5, ncols = 5, chanceLightStartsOn = 0.25 }) => {
         const check = board.every(row => row.every(cell => !cell));
         return check;
     }
+
+    function resetGame() {
+        setBoard(createBoard()); // Reset the board to a new random state
+    }
+
+    /** flip cell at (y, x) and cells around it */
 
     function flipCellsAround(coord) {
         setBoard(oldBoard => {
@@ -98,7 +105,10 @@ const Board = ({ nrows = 5, ncols = 5, chanceLightStartsOn = 0.25 }) => {
     return (
         <div>
             {hasWon() ? (
-                <div className="Board-win">You Win!</div>
+                <div className="Board-win">
+                    <h2>You Win!</h2>
+                    <PlayAgain resetGame={resetGame} />
+                </div>
             ) : (
                 <table className="Board">
                     <tbody>{lightsOutBoard}</tbody>
